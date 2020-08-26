@@ -1,5 +1,4 @@
-
-fun main(){
+private fun main(){
 
     printAddEntry(question = "Vänligen ange ett personnummer i format SSYYMMDDXXXX eller SSSSYYMMDDXXXX")
     val reader = readLine()
