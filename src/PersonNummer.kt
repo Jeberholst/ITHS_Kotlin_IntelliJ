@@ -19,6 +19,9 @@ fun main(){
                 false ->{ printPerIDnumIncorrect() }
             }
         }
+        true -> {
+            main()
+        }
     }
 
 }
@@ -42,8 +45,6 @@ fun isCorrectPersonalIdNumber(pNumber: String): Boolean{
             finalCalcArr.add(calculatedNum)
         }
     }
-
-    println(finalCalcArr.sum() % 10)
 
     return when(finalCalcArr.sum() % 10) {
         1-> {false}
