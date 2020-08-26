@@ -62,8 +62,8 @@ fun printErrorEntry (){
     println("FEL ANTAL NUMMER ANGIVNA, FÖRSÖK IGEN!")
 }
 fun printPerIDnumCorrect (){
-    println("PERSONNUMMER ÄR KORREKT")
+    println("PERSONNUMMER ÄR GILTIGT")
 }
 fun printPerIDnumIncorrect (){
-    println("PERSONNUMMER ÄR INKORREKT")
+    println("PERSONNUMMER ÄR GILTIGT")
 }
