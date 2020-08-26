@@ -65,5 +65,5 @@ fun printPerIDnumCorrect (){
     println("PERSONNUMMER ÄR GILTIGT")
 }
 fun printPerIDnumIncorrect (){
-    println("PERSONNUMMER ÄR GILTIGT")
+    println("PERSONNUMMER ÄR OGILTIGT")
 }
