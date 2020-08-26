@@ -34,28 +34,29 @@ private fun main(){
 
 private fun doLoopUntilCorrectEntry(randomRange: Int){
 
-    var reader2: String?
+    var reader: String?
     var tryCounter = 0
 
    // println(randomRange)
 
     do {
-        reader2 = readLine()
+        reader = readLine()
         tryCounter += 1
+        val inputNum = reader!!.toInt()
 
         when{
-            reader2!!.toInt() > randomRange -> {
+            inputNum > randomRange -> {
                 println("TRY AGAIN! NUMBER IS LOWER")}
-            reader2.toInt() < randomRange -> {
+            inputNum < randomRange -> {
                 println("TRY AGAIN! NUMBER IS HIGHER")
             }
         }
-        when (reader2?.toInt() == randomRange){
+        when (inputNum == randomRange){
             true -> {
                 println("CORRECT! GOOD WORK!! AMOUNT OF TRIES: $tryCounter")
             }
         }
-    }while (reader2?.toInt() != randomRange)
+    }while (reader?.toInt() != randomRange)
 
 }
 
