@@ -1,6 +1,6 @@
 private fun main(){
 
-    println("Welcome to FizzBuzz!")
+    println("Welcome to HiLo!")
     println("Please choose a difficulty below by typing the corresponding letter (E = EASY, M = MEDIUM, H = HARD):")
     val reader = readLine()
 
@@ -25,8 +25,8 @@ private fun main(){
             doLoopUntilCorrectEntry(hardRange.random())
         }
         else -> {
-            println("CHOOSEN DIFFICULTY IS NON EXISTING, PLEASE SELECT E, M or H")
-            //main() //TODO RESTART?
+            println("CHOSEN DIFFICULTY IS NON EXISTING, PLEASE SELECT E, M or H")
+            main() //TODO allow exit of program?
         }
     }
 
