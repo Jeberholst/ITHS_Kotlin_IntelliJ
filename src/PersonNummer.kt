@@ -1,6 +1,6 @@
 private fun main(){
 
-    printAddEntry(question = "Vänligen ange ett personnummer i format SSYYMMDDXXXX eller SSSSYYMMDDXXXX")
+    printAddEntry(question = "Vänligen ange ett personnummer i format SSYYMMDDXXXX eller SSYYYYMMDDXXXX")
     val reader = readLine()
     var pNumber = ""
     var isError = false
