@@ -9,27 +9,16 @@ private fun main(){
 
     startProgram()
     //TODO SHOW PROGRAM CONTINUED/RESTARTED AFTER SUCCESS
-
     do {
 
         val reader: String? = readLine()
 
         when(reader.toString()){
-            "0", "" -> {
-                println("Dummer, tryck inte bara ENTER eller ange 0 ;)")
-            }
-            "1" -> {
-                println(runAdditionOfTwo());
-            }
-            "2" -> {
-                println(runStringCharCount());
-            }
-            "3" -> {
-                println(runStringReversal());
-            }
-            "4" -> {
-                println(sumSuppliedNumbers());
-            }
+            "0", "" -> { println("Dummer, tryck inte bara ENTER eller ange 0 ;)") }
+            "1" -> { println(runAdditionOfTwo()); startProgram() }
+            "2" -> { println(runStringCharCount()); startProgram() }
+            "3" -> { println(runStringReversal()); startProgram()  }
+            "4" -> { println(sumSuppliedNumbers()); startProgram()  }
             else -> {
                 when(reader.equals("e", ignoreCase = true).not()){
                     true -> {
@@ -55,7 +44,7 @@ private fun runStringCharCount(): String {
     println("Ange en bokstavssträng: "); val charStr = readLine()?.length ?: 0
     return when {
         charStr != 0 -> { "Längden är: $charStr" }
-        else -> { "ERROR" }
+        else -> { "KAN INTE BERÄKNA ETT TOMT VÄRDE" }
     }
 }
 
@@ -63,7 +52,7 @@ private fun runStringReversal(): String {
     println("Ange en bokstavssträng du vill spegelvända: "); val charStrRev = readLine()?.reversed() ?: 0
     return when {
         charStrRev != 0 -> { "Spegelvänd sträng: $charStrRev" }
-        else -> { "ERROR" }
+        else -> { "FÖRSÖKTE SPEGELVÄNDA INGENTING SÅ HÄR BLEV DET:" }
     }
 }
 private fun sumSuppliedNumbers(): String {
