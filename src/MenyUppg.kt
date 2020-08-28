@@ -8,25 +8,33 @@ private const val menuChoiceEnd = "Avsluta program."
 private fun main(){
 
     startProgram()
-    //TODO SHOW PROGRAM CONTINUED/RESTARTED AFTER SUCCESS
+    var cProgram = true
+
     do {
 
         val reader: String? = readLine()
 
         when(reader.toString()){
             "0", "" -> { println("Dummer, tryck inte bara ENTER eller ange 0 ;)") }
-            "1" -> { println(runAdditionOfTwo()); startProgram() }
-            "2" -> { println(runStringCharCount()); startProgram() }
-            "3" -> { println(runStringReversal()); startProgram()  }
-            "4" -> { println(sumSuppliedNumbers()); startProgram()  }
+            "1" -> { println(runAdditionOfTwo()) }
+            "2" -> { println(runStringCharCount()) }
+            "3" -> { println(runStringReversal()) }
+            "4" -> { println(sumSuppliedNumbers()) }
             else -> {
                 when(reader.equals("e", ignoreCase = true).not()){
                     true -> {
                         println("----INGET PROGRAM MOTSVARAR DET DU SKREV IN.. FÖRSÖK IGEN----")
-                        startProgram()
+                    }
+                    false -> {
+                        cProgram = false
                     }
                 }
-
+            }
+        }
+        when(cProgram){
+            true -> {
+                println("...")
+                startProgram()
             }
         }
 
@@ -72,7 +80,7 @@ private fun startProgram(){
             Pair(3, menuChoice3),
             Pair(4, menuChoice4))
 
-    val endChoice= Pair("e", menuChoiceEnd)
+    val endChoice= Pair("E/e", menuChoiceEnd)
 
     println(startQuestion)
     arrOfChoices.forEach {
@@ -81,4 +89,3 @@ private fun startProgram(){
     println("${endChoice.first}. ${endChoice.second}")
 
 }
-
