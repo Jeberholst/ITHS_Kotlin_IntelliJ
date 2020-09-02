@@ -39,19 +39,35 @@ fun main(){
                     false ->{ println(searchError) }
                 }
             }
-            3 -> { library.listBooks() }
+            3 -> { library.listBooksFull() }
             4 -> {
 
-                val listBooks = library.listBooks().filter { book -> !book.available }
+                val listBooks = library.listBooksList().filter { book -> !book.available }
 
                 when(listBooks.count() != 0){
                     true -> {
 
+                        //TODO VISA LISTA IGEN EFTER EN BOK ÅTERLÄMNAD
+
                         listBooks.forEachIndexed { index, book ->
                             println("$index. ${book.name} [ ${book.isAvailableStr()} ]")
                         }
-                        println("Enter the number before the books name to return it")
+                        println("Enter the number corresponding to the book name to return it:")
                         val readline = readLine()
+
+                        try {
+                            val sb = listBooks[readline!!.toInt()]
+                            sb.returnBook()
+                            println("BOOK ${sb.name} RETURNED!")
+                            println()
+                            printChoices()
+                        }catch (e: Exception){
+                            //println(e)
+                            println("ENTERED VALUE DOESNT EXIST")
+                            println(menuInvalidInput) //TODO invalid number CHANGE STRING
+                            printChoices()
+                        }
+
                     }
                     false ->{
                         println("ALL BOOKS SEEM TO HAVE BEEN RETURNED!")

@@ -1,8 +1,10 @@
 package septemberEtt
 
 import java.lang.StringBuilder
+import kotlin.random.Random
 
 class Book(
+        var id: Random = Random(0),
         var name: String = "",
         var author: Author? = Author(surName = "", lastName = ""),
         var year: Int = 0,

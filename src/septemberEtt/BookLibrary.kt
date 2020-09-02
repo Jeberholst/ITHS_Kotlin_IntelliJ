@@ -1,15 +1,19 @@
 package septemberEtt
 
+import kotlin.random.Random
+
+
 class BookLibrary {
 
     private val book: Book? = Book()
 
     fun addBooks(){
 
-        val book1 = Book(name = "Book Nummer 1", Author("Joakim", "Eberholst"), year = 1996, edition = "SECOND EDITION",available = true)
-        val book2 = Book(name = "Book Nummer 2", Author("Joakim2", "Eberholst2"), year = 1997, available = true)
+        val book1 = Book(id = Random(10000), name = "Book Nummer 1", Author("Joakim", "Eberholst"), year = 1996, edition = "SECOND EDITION",available = false)
+        val book2 = Book(id = Random(10000), name = "Book Nummer 2", Author("Joakim2", "Eberholst2"), year = 1997, available = false)
+        val book3 = Book(id = Random(10000), name = "Book Nummer 3", Author("Aaa", "Eberholst3"), year = 1997, available = true)
 
-        val arr = arrayListOf(book1, book2)
+        val arr = arrayListOf(book1, book2, book3)
 
         book!!.listBooks().apply {
             addAll(arr)
@@ -30,13 +34,13 @@ class BookLibrary {
         return null
     }
 
-    fun listBooks(): MutableList<Book> {
+    fun listBooksList(): MutableList<Book> = book!!.bookList
 
-        return book!!.listBooks()
-//        book!!.bookList.forEach {
-//            println(it.toString())
-//            println()
-//        }
+    fun listBooksFull() {
+        book!!.bookList.forEach {
+            println(it.toString())
+            println()
+        }
     }
 
     fun returnOrLoan(book: Book){
