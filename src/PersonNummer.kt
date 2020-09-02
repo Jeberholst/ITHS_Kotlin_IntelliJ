@@ -14,8 +14,8 @@ private fun main(){
     when(isError){
         false -> {
             when(isCorrectPersonalIdNumber(pNumber)){
-                true ->{ printPerIDnumCorrect() }
                 false ->{ printPerIDnumIncorrect() }
+                true ->{ printPerIDnumCorrect() }
             }
         }
         true -> {

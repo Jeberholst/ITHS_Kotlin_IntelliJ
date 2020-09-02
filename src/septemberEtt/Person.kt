@@ -1,7 +1,7 @@
 package septemberEtt
 
 data class Person (
-        var firstName: String = "Firstname",
+    var firstName: String = "Firstname",
     var lastName: String,
     var email: String = "empty@example.com",
     var phoneNumber: String = "XXXXXXXXXX",
