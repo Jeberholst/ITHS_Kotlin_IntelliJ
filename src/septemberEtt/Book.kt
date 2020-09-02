@@ -11,13 +11,6 @@ class Book(
 
     var bookList: MutableList<Book> = mutableListOf()
 
-    fun loanBook(){
-        when(isAvailable()){
-            true -> {
-                available = false
-            }
-        }
-    }
 
     fun isAvailable(): Boolean {
         return available
@@ -27,6 +20,34 @@ class Book(
         return when(available){
             true -> "AVAILABLE"
             false -> "NOT AVAILABLE"
+        }
+    }
+
+    fun returnOrLoan(){
+
+        var reader: String? = ""
+
+        when(isAvailable()){
+            true -> {
+                println("${isAvailableStr()}, do you wanna withdraw the book for loaning? Y/N")
+                reader = readLine()
+                when(reader == "Y"){
+                    true -> { loanBook(); println("HERE YOU GO, TAKE THE BOOK!")}}
+            }
+            false ->{
+                println("${isAvailableStr()}, do you want to return the book? Y/N")
+                reader = readLine()
+                when(reader == "Y"){
+                    true -> { returnBook(); println("THE BOOK HAS BEEN RETURNED, THANK YOU!")}}
+            }
+        }
+    }
+
+    fun loanBook(){
+        when(isAvailable()){
+            true -> {
+                available = false
+            }
         }
     }
 
@@ -60,10 +81,7 @@ class Book(
         }
         return strBuilder.toString()
     }
-
-
 }
-
 
 class Author(
         var surName: String,

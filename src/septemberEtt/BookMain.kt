@@ -27,10 +27,16 @@ fun main(){
             2 -> {
                 searchInput = "Book Nummer 2"
                 println("Ange den boks namn du vill leta efter:")
-                val v = searchBookByName(searchInput.toString())
+                val searchedBook = searchBookByName(searchInput.toString())
 
-
-
+                when(searchedBook != null){
+                    true -> {
+                        book!!.returnOrLoan()
+                    }
+                    false ->{
+                        println("SÖKT BOOK FINNS INTE")
+                    }
+                }
             }
             3 -> { listBooks() }
             4 -> { }
