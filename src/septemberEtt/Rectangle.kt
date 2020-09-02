@@ -22,7 +22,7 @@ data class Rectangle(
 
     fun checkCollision(rectangle1: Rectangle, rectangle2: Rectangle): Boolean {
 
-        //TODO GÖRA KLART...
+        //TODO GÖRA KLART... SNYGGA TILL
 
         var rec1Xend = rectangle1.xy.x + rectangle1.width
         var rec2Xstart = rectangle2.xy.x
