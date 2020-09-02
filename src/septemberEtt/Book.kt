@@ -12,11 +12,11 @@ class Book(
     var bookList: MutableList<Book> = mutableListOf()
 
 
-    fun isAvailable(): Boolean {
+    private fun isAvailable(): Boolean {
         return available
     }
 
-    fun isAvailableStr(): String {
+    private fun isAvailableStr(): String {
         return when(available){
             true -> "AVAILABLE"
             false -> "NOT AVAILABLE"
@@ -32,18 +32,22 @@ class Book(
                 println("${isAvailableStr()}, do you wanna withdraw the book for loaning? Y/N")
                 reader = readLine()
                 when(reader == "Y"){
-                    true -> { loanBook(); println("HERE YOU GO, TAKE THE BOOK!")}}
+                    true -> { loanBook(); println("HERE YOU GO, TAKE THE BOOK!")}
+                    false ->  { println("YOU SELECTED NO, NOTHING HAS BEEN CHANGED.") }
+                }
             }
             false ->{
                 println("${isAvailableStr()}, do you want to return the book? Y/N")
                 reader = readLine()
                 when(reader == "Y"){
-                    true -> { returnBook(); println("THE BOOK HAS BEEN RETURNED, THANK YOU!")}}
+                    true -> { returnBook(); println("THE BOOK HAS BEEN RETURNED, THANK YOU!")}
+                    false -> { println("YOU SELECTED NO, NOTHING HAS BEEN CHANGED.")}
+                }
             }
         }
     }
 
-    fun loanBook(){
+    private fun loanBook(){
         when(isAvailable()){
             true -> {
                 available = false
@@ -51,7 +55,7 @@ class Book(
         }
     }
 
-    fun returnBook(){
+    private fun returnBook(){
         when(isAvailable()){
             false -> {
                 available = true
@@ -83,12 +87,8 @@ class Book(
     }
 }
 
-class Author(
-        var surName: String,
-        var lastName: String){
-
-        fun fullName(): String{
-            return  "$surName + $lastName"
-        }
-
+class Author(var surName: String, var lastName: String){
+    fun fullName(): String{
+        return  "$surName + $lastName"
+    }
 }

@@ -1,14 +1,15 @@
 package septemberEtt
 
-import java.io.Reader
-
 private const val menuChoice1 = "Add a book to the library"
 private const val menuChoice2 = "Search for a book by name"
 private const val menuChoice3 = "List all available books"
 private const val menuChoice4 = "Return a book"
 private const val menuChoice5 = "Quit"
+private const val menuInvalidInput = "! PLEASE INPUT A VALID MENU-CHOICE !"
 
-//var listOfBooks = mutableListOf<Book>()
+private const val searchBookName = "SEARCH FOR THE NAME OF THE BOOK YOU WANNA FIND:"
+private const val searchError = "BOOK COULDNT BE FOUND!"
+
 var reader: String? = ""
 var cProgram = true
 var book: Book? = Book()
@@ -26,23 +27,19 @@ fun main(){
             1 -> { addBooks() }
             2 -> {
                 searchInput = "Book Nummer 2"
-                println("Ange den boks namn du vill leta efter:")
+                println(searchBookName)
                 val searchedBook = searchBookByName(searchInput.toString())
 
                 when(searchedBook != null){
-                    true -> {
-                        book!!.returnOrLoan()
-                    }
-                    false ->{
-                        println("SÖKT BOOK FINNS INTE")
-                    }
+                    true -> { book!!.returnOrLoan() }
+                    false ->{ println(searchError) }
                 }
             }
             3 -> { listBooks() }
             4 -> { }
             5 -> { cProgram = false }
             else -> {
-                println("--- VÄNLIGEN ANGE ETT GILTIGT MENYVAL ---")
+                println(menuInvalidInput)
                 printChoices()
             }
         }
