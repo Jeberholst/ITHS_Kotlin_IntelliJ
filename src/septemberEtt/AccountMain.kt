@@ -2,9 +2,9 @@ package septemberEtt
 
 fun main(){
 
-    val salaryAcc = Account()
-    val savingAcc = Account(1000.0)
-    var money: Double? = 0.0
+    val salaryAcc = Account(name = "Thor Salary")
+    val savingAcc = Account(balance = 1000.0, name = "Thor Savings")
+    var money: Double?
 
     savingAcc.apply {
         println(balance)
@@ -12,9 +12,11 @@ fun main(){
         println(balance)
         money = savingAcc.withdraw(100.0)
         salaryAcc.deposit(money!!)
+        println("Saving's balance: $balance")
     }
 
-    println("Saving's balance: ${savingAcc.balance}")
     println("Salary balance: ${salaryAcc.balance}")
+    println(salaryAcc.toString())
+    println(savingAcc.toString())
 
 }
