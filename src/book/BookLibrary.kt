@@ -45,7 +45,7 @@ class BookLibrary {
 
     fun returnOrLoan(book: Book){
 
-        var reader: String?
+        val reader: String?
 
         when(book.available){
             true -> {

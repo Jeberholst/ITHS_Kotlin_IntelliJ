@@ -60,13 +60,11 @@ fun main(){
                             sb.returnBook()
                             println("BOOK ${sb.name} RETURNED!")
                             println()
-                            printChoices()
                         }catch (e: Exception){
                             //println(e)
                             println("ENTERED VALUE DOESNT EXIST, RETURNING TO MENU")
-                            printChoices()
                         }
-
+                        printChoices()
                     }
                     false ->{
                         println("ALL BOOKS SEEM TO HAVE BEEN RETURNED!")
