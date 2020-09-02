@@ -47,7 +47,7 @@ fun main(){
                 when(listBooks.count() != 0){
                     true -> {
 
-                        //TODO VISA LISTA IGEN EFTER EN BOK ÅTERLÄMNAD
+                        //TODO VISA LISTA IGEN EFTER EN BOK ÅTERLÄMNAD?
 
                         listBooks.forEachIndexed { index, book ->
                             println("$index. ${book.name} [ ${book.isAvailableStr()} ]")
@@ -73,9 +73,6 @@ fun main(){
                         println("ALL BOOKS SEEM TO HAVE BEEN RETURNED!")
                     }
                 }
-
-
-
             }
             5 -> { cProgram = false }
             else -> {
