@@ -1,5 +1,6 @@
 package septemberEtt
 
+
 private const val menuChoice1 = "Add a book to the library"
 private const val menuChoice2 = "Search for a book by name"
 private const val menuChoice3 = "List all available books"
@@ -7,36 +8,59 @@ private const val menuChoice4 = "Return a book"
 private const val menuChoice5 = "Quit"
 private const val menuInvalidInput = "! PLEASE INPUT A VALID MENU-CHOICE !"
 
-private const val searchBookName = "SEARCH FOR THE NAME OF THE BOOK YOU WANNA FIND:"
-private const val searchError = "BOOK COULDNT BE FOUND!"
+//private const val searchBookName = "SEARCH FOR THE NAME OF THE BOOK YOU WANNA FIND:"
+private const val searchError = "BOOK COULDN'T BE FOUND!"
 
 var reader: String? = ""
 var cProgram = true
-var book: Book? = Book()
+var library: BookLibrary = BookLibrary()
 var searchInput: String? = ""
 
 fun main(){
 
     printChoices()
-    addBooks()
+    library.addBooks()
 
     do {
         reader = readLine()
 
         when (reader!!.toInt()) {
-            1 -> { addBooks() }
+            1 -> { library.addBooks()}
             2 -> {
+                //TODO USER INPUT?
                 searchInput = "Book Nummer 2"
-                println(searchBookName)
-                val searchedBook = searchBookByName(searchInput.toString())
+//              println(searchBookName)
+                println("Searching for $searchInput")
 
-                when(searchedBook != null){
-                    true -> { book!!.returnOrLoan() }
+                val sBook = library.searchBookByName(searchInput.toString())
+
+                when(sBook != null){
+                    true -> { library.returnOrLoan(book = sBook) }
                     false ->{ println(searchError) }
                 }
             }
-            3 -> { listBooks() }
-            4 -> { }
+            3 -> { library.listBooks() }
+            4 -> {
+
+                val listBooks = library.listBooks().filter { book -> !book.available }
+
+                when(listBooks.count() != 0){
+                    true -> {
+
+                        listBooks.forEachIndexed { index, book ->
+                            println("$index. ${book.name} [ ${book.isAvailableStr()} ]")
+                        }
+                        println("Enter the number before the books name to return it")
+                        val readline = readLine()
+                    }
+                    false ->{
+                        println("ALL BOOKS SEEM TO HAVE BEEN RETURNED!")
+                    }
+                }
+
+
+
+            }
             5 -> { cProgram = false }
             else -> {
                 println(menuInvalidInput)
@@ -53,40 +77,8 @@ fun main(){
 
 }
 
-private fun addBooks(){
-
-    val book1 = Book(name = "Book Nummer 1", Author("Joakim", "Eberholst"), year = 1996, edition = "SECOND EDITION",available = true)
-    val book2 = Book(name = "Book Nummer 2", Author("Joakim2", "Eberholst2"), year = 1997, available = true)
-
-    val arr = arrayListOf(book1, book2)
-
-    book!!.listBooks().apply {
-        addAll(arr)
-    }
-    println("Books added")
-
-}
-
-private fun searchBookByName(bName: String): Book? {
-
-    val b = book!!.listBooks()
-
-    val newList = b.filter { book -> book.name == bName }
-    newList.forEach {
-        return it
-    }
-
-    return null
-}
 
 
-private fun listBooks(){
-
-    book!!.bookList.forEach {
-        println(it.toString())
-        println()
-    }
-}
 
 private fun printChoices(){
 

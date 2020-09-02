@@ -11,43 +11,18 @@ class Book(
 
     var bookList: MutableList<Book> = mutableListOf()
 
-
-    private fun isAvailable(): Boolean {
+     fun isAvailable(): Boolean {
         return available
     }
 
-    private fun isAvailableStr(): String {
+    fun isAvailableStr(): String {
         return when(available){
             true -> "AVAILABLE"
             false -> "NOT AVAILABLE"
         }
     }
 
-    fun returnOrLoan(){
-
-        var reader: String? = ""
-
-        when(isAvailable()){
-            true -> {
-                println("${isAvailableStr()}, do you wanna withdraw the book for loaning? Y/N")
-                reader = readLine()
-                when(reader == "Y"){
-                    true -> { loanBook(); println("HERE YOU GO, TAKE THE BOOK!")}
-                    false ->  { println("YOU SELECTED NO, NOTHING HAS BEEN CHANGED.") }
-                }
-            }
-            false ->{
-                println("${isAvailableStr()}, do you want to return the book? Y/N")
-                reader = readLine()
-                when(reader == "Y"){
-                    true -> { returnBook(); println("THE BOOK HAS BEEN RETURNED, THANK YOU!")}
-                    false -> { println("YOU SELECTED NO, NOTHING HAS BEEN CHANGED.")}
-                }
-            }
-        }
-    }
-
-    private fun loanBook(){
+    fun loanBook(){
         when(isAvailable()){
             true -> {
                 available = false
@@ -55,7 +30,7 @@ class Book(
         }
     }
 
-    private fun returnBook(){
+    fun returnBook(){
         when(isAvailable()){
             false -> {
                 available = true
@@ -63,9 +38,10 @@ class Book(
         }
     }
 
-    fun addBook(book: Book){
-
-    }
+    //TODO
+//    fun addBook(book: Book){
+//
+//    }
 
     fun listBooks(): MutableList<Book> {
         return bookList
@@ -75,7 +51,7 @@ class Book(
         val strBuilder = StringBuilder().apply {
             append("Book: $name")
             appendLine()
-            append("Author: ${author?.surName} ${author?.lastName}")
+            append("Author: ${author?.fullName()}")
             appendLine()
             append("Year: $year")
             appendLine()
@@ -89,6 +65,6 @@ class Book(
 
 class Author(var surName: String, var lastName: String){
     fun fullName(): String{
-        return  "$surName + $lastName"
+        return  "$surName, $lastName"
     }
 }
