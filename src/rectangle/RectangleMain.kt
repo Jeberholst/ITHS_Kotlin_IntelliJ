@@ -1,4 +1,4 @@
-package septemberEtt
+package rectangle
 
 import java.awt.Point
 

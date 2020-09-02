@@ -1,4 +1,4 @@
-package septemberEtt
+package rectangle
 
 import java.awt.Point
 
@@ -7,6 +7,7 @@ data class Rectangle(
         var height: Double = 0.0,
         var xy: Point = Point(0,0)) {
 
+    //TODO NOOOOOOT DONE
 
 //    Lägg till en metod checkCollision i Rectangle-klassen som tittar på två rektanglar om det finns överlapp.
 //    Instansvariablerna x och y refererar till övre vänstra hörnet på en rektangel.

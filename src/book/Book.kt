@@ -1,4 +1,4 @@
-package septemberEtt
+package book
 
 import java.lang.StringBuilder
 import kotlin.random.Random

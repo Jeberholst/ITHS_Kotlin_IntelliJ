@@ -1,4 +1,4 @@
-package septemberEtt
+package person
 
 data class Person (
     var firstName: String = "Firstname",

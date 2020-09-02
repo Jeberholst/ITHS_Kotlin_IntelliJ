@@ -1,4 +1,4 @@
-package septemberEtt
+package book
 
 
 private const val menuChoice1 = "Add a book to the library"
@@ -63,8 +63,7 @@ fun main(){
                             printChoices()
                         }catch (e: Exception){
                             //println(e)
-                            println("ENTERED VALUE DOESNT EXIST")
-                            println(menuInvalidInput) //TODO invalid number CHANGE STRING
+                            println("ENTERED VALUE DOESNT EXIST, RETURNING TO MENU")
                             printChoices()
                         }
 

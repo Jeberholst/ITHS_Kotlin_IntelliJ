@@ -1,4 +1,4 @@
-package septemberEtt
+package account
 
 class Account(
         var balance: Double = 0.0,

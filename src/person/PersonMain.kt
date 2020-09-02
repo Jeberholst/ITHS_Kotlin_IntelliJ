@@ -1,4 +1,4 @@
-package septemberEtt
+package person
 
 fun main() {
 
