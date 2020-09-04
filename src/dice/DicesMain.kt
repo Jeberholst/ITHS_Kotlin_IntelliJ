@@ -13,7 +13,7 @@ const val strIncorrectGuess = "--> Incorrect guess. No points for you!"
 val players: Player = Player()
 var amountOfDicesPerPlayer = 0
 var amountOfDiceSides = 0
-var amountOfPlayers = 3
+var amountOfPlayers = 0
 
 fun main () {
 
