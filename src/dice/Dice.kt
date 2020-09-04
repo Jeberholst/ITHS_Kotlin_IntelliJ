@@ -6,7 +6,7 @@ class Dice(
 
     fun rollCurrentDice() {
         currentVal = (1 .. sides).random()
-        println(currentVal)
+        //println(currentVal)
     }
 
 }

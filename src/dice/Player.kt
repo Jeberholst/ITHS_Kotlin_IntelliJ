@@ -3,7 +3,8 @@ package dice
 class Player (
         var name: String = "",
         var points: Int = 0,
-        var diceList: MutableList<Dice> = mutableListOf())
+        var diceList: MutableList<Dice> = mutableListOf(),
+        var guesses: MutableList<Int> = mutableListOf())
 {
     var playersList: MutableList<Player> = mutableListOf()
 
