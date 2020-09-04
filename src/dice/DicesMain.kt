@@ -1,25 +1,37 @@
 package dice
 
+//    val p1 = Player(name = "Jocke")
+//    val p2 = Player(name = "Alpha")
+//    val p3 = Player(name = "Beta")
+//    val listOfAddedPlayers = mutableListOf(p1, p2, p3)
+//    players.playersList.addAll(listOfAddedPlayers)
+
+const val strWelcome = "Welcome!"
+const val strAskAmountOfPlayers = "Please enter AMOUNT of PLAYERS"
+const val strAskDicesAmount = "Please enter AMOUNT of DICES per PLAYER:"
+const val strAskDicesSides = "Please enter AMOUNT of SIDES for each DICE:"
+const val strCorrectGuess = "--> Correct guess. Increasing your points by 1!"
+const val strIncorrectGuess = "--> Incorrect guess. No points for you!"
+
 
 val players: Player = Player()
 var amountOfDicesPerPlayer = 0
 var amountOfDiceSides = 0
 var amountOfPlayers = 2
 
+
 fun main () {
 
-    println("Welcome!")
-    println("Please enter AMOUNT of DICES per PLAYER:")
-    var readL = readLine(); amountOfDicesPerPlayer = readL?.toInt() ?: 1
-    println("Please enter AMOUNT of SIDES for each DICE:")
+    println(strWelcome)
+    println(strAskAmountOfPlayers)
+    var readL = readLine(); amountOfPlayers = readL?.toInt() ?: 1
+    println(strAskDicesAmount)
+    readL = readLine(); amountOfDicesPerPlayer = readL?.toInt() ?: 1
+    println(strAskDicesSides)
     readL = readLine(); amountOfDiceSides = readL?.toInt() ?: 1
-    //addNewPlayersToList()
 
-    val p1 = Player(name = "Jocke")
-    val p2 = Player(name = "Alpha")
-    val p3 = Player(name = "Beta")
-    val listOfAddedPlayers = mutableListOf(p1, p2, p3)
-    players.playersList.addAll(listOfAddedPlayers)
+    addNewPlayersToList()
+
     val currentPlayers = players.playersList
     currentPlayers.forEach {
         it.addDicesToPlayer(amountOfDices = amountOfDicesPerPlayer, amountOfSides = amountOfDiceSides)
@@ -30,20 +42,20 @@ fun main () {
         println("Starting round $i ...")
 
         currentPlayers.forEach { player ->
-            println("Guess your next roll ${player.name}")
-            val rLine = readLine()
+            println("Guess your next roll ${player.name}! (if no guess is supplied you guess will be defaulted to 100000)")
+            val rLine = readLine() ?: 100000
 
             println("Rolling dices..")
             player.rollAllDices()
             println("You rolled in total: ${player.sumOfDices()}")
 
-            when(player.sumOfDices() == rLine?.toInt()){
+            when(player.sumOfDices() == rLine){
                 true -> {
-                    println("--> Correct guess. Increasing points by 1!")
+                    println(strCorrectGuess)
                     player.increaseScore()
                 }
                 false -> {
-                    println("--> Incorrect guess. No points for you!")
+                    println(strIncorrectGuess)
                 }
             }
 
@@ -60,10 +72,9 @@ fun main () {
 fun addNewPlayersToList(){
 
     for (p in 0 until amountOfPlayers){
-        println("Supply a player name")
-        var readAddPlayer = readLine()
-        var newPlayer = Player(name = readAddPlayer.toString())
-        newPlayer.addDicesToPlayer(amountOfDices = amountOfDicesPerPlayer, amountOfSides =  amountOfDiceSides)
+        println("Supply a player name:")
+        val rPlayerName = readLine()
+        val newPlayer = Player(name = rPlayerName.toString())
         players.playersList.add(newPlayer)
     }
 

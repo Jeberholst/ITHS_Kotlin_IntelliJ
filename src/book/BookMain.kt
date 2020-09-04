@@ -87,9 +87,6 @@ fun main(){
 
 }
 
-
-
-
 private fun printChoices(){
 
     val arrOfChoices = arrayListOf(
