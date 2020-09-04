@@ -23,15 +23,15 @@ fun main () {
 
     var readL: String?
     println(strWelcome)
-//  println(strAskAmountOfPlayers)
-//  readL = readLine(); amountOfPlayers = readL?.toInt() ?: 1
+    println(strAskAmountOfPlayers)
+    readL = readLine(); amountOfPlayers = readL?.toInt() ?: 1
     println(strAskDicesAmount)
     readL = readLine(); amountOfDicesPerPlayer = readL?.toInt() ?: 1
     println(strAskDicesSides)
     readL = readLine(); amountOfDiceSides = readL?.toInt() ?: 1
 
-//  addNewPlayersToList()
-    addTestGroup()
+    addPlayersToListFromInput()
+//  addTestGroup()
 
     currentPlayers.forEach {
         it.addDicesToPlayer(amountOfDices = amountOfDicesPerPlayer, amountOfSides = amountOfDiceSides)
@@ -44,8 +44,8 @@ fun main () {
 
         currentPlayers.forEach { player ->
             println("Guess your next roll ${player.name}!")
-//          val rLine = readLine()
-            val rLine = player.guesses[i-1]
+            val rLine = readLine()
+//          val rLine = player.guesses[i-1]
             println("Rolling dices..")
             player.rollAllDices()
 
@@ -55,8 +55,8 @@ fun main () {
                     append("${it.currentVal}, ")
                 }
             })
-            println(strBuilder.toString())
 
+            println("Your dice-rolls: $strBuilder")
             println("You guessed $rLine")
             println("You rolled in total: ${player.sumOfDices()}")
 
