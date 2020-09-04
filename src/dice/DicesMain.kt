@@ -15,8 +15,6 @@ var amountOfDicesPerPlayer = 0
 var amountOfDiceSides = 0
 var amountOfPlayers = 3
 
-
-
 fun main () {
 
     val currentPlayers = players.playersList
@@ -68,8 +66,6 @@ fun main () {
                     println(strIncorrectGuess)
                 }
             }
-
-
 
         }
     }
