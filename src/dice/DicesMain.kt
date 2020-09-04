@@ -48,31 +48,12 @@ fun main () {
             }
 
         }
-
- /*       currentPlayers.forEachIndexed { index, player ->
-
-            println("Guess your next roll mr/ms ${player.name}")
-            val rLine = readLine()
-            player.rollCurrentDice(player.diceList[index])
-
-            when(player.diceList[index].currentVal == rLine?.toInt()){
-                true -> {
-                    println("--> Correct guess. Increasing points by 1!")
-                    player.increaseScore()
-                }
-                false -> {
-                    println("--> Incorrect guess. No points for you!")
-                }
-            }
-
-        }*/
     }
 
     println("Results..")
     currentPlayers.forEach { cPlayer ->
         println("${cPlayer.name} : ${cPlayer.points}")
     }
-
 
 }
 
