@@ -55,6 +55,10 @@ fun main () {
         println("${cPlayer.name} : ${cPlayer.points}")
     }
 
+    currentPlayers.sortBy { cPlayer -> cPlayer.points }
+    currentPlayers.forEach { cPlayer ->
+        println("${cPlayer.name} : ${cPlayer.points}")
+    }
 }
 
 fun addNewPlayersToList(){
