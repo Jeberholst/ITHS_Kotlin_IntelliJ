@@ -21,10 +21,9 @@ fun main () {
 
     val currentPlayers = players.playersList
 
-    var readL: String?
     println(strWelcome)
     println(strAskAmountOfPlayers)
-    readL = readLine(); amountOfPlayers = readL?.toInt() ?: 1
+    var readL: String? = readLine(); amountOfPlayers = readL?.toInt() ?: 1
     println(strAskDicesAmount)
     readL = readLine(); amountOfDicesPerPlayer = readL?.toInt() ?: 1
     println(strAskDicesSides)
