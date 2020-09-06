@@ -1,75 +1,108 @@
 package car
 
-abstract class Vehicle (
-        var cDriver: Driver? = null){
+abstract class Vehicle (private var cDriver: Driver? = null){
 
-    var listOfVehicles = mutableListOf<Vehicle>()
+    var listOfVehicles = mutableListOf<Vehicle?>()
+    private var cVehicleName: String? = this::class.java.simpleName
+    private var cVehicleAgeReq: Int? = 0
+    private var milesRemaining: Double? = 0.0
+    private var milesDriven: Double? = 0.0
 
-    fun addVehicle(vehicle: Vehicle){
+    fun driveVehicle(targetMiles: Double = 0.0, driveMiles: Double = 0.0){
+
+        var printType: Int? = 3
+
+        milesRemaining = calculateMilesRemaining(tMiles = targetMiles, rMiles = driveMiles)
+        milesDriven = driveMiles
+
+        when(this.isDriverAssigned()){
+            true ->
+               when(this) {
+                   is Car -> {
+                       cVehicleAgeReq = this.getAgeReq()
+                       printType = when(this.checkAgeReq(driverAge = cDriver!!.age)){
+                          true ->  {1}
+                          false -> {2}
+                       }
+                   }
+                   is MilitaryTank -> {
+                       cVehicleAgeReq = this.getAgeReq()
+                       printType = when(this.checkAgeReq(driverAge = cDriver!!.age)){
+                           true ->  {1}
+                           false -> {2}
+                       }
+               }
+           }
+        }
+        printVehicleAction(printType)
+    }
+
+    /** ADD A VEHICLE TO THE LIST OF VEHICLES  */
+    open fun addVehicle(vehicle: Vehicle?){
         listOfVehicles.add(vehicle)
     }
 
-    fun drive(targetMiles: Double = 0.0, drivenMiles: Double = 0.0){
-
-        when(this){
-            is Car -> {
-                if(isDriverAssigned()){
-                    if(this.checkAgeReq(driverAge = cDriver!!.age)){
-                        println("Car drove $drivenMiles miles - ${calculateMilesRemaining(targetMiles, drivenMiles)} miles to go")
-                    }else{
-                        println("Car didn't drive - ${cDriver?.name} is ${cDriver?.age}, but must be 18 or older to drive")
-                    }
-                }else{
-                    println("Car didn’t drive - there’s no driver!")
-                }
-            }
-            is MilitaryTank -> {
-                if(isDriverAssigned()){
-                    if(this.checkAgeReq(driverAge = cDriver!!.age)){
-                        println("MilitaryTank drove $drivenMiles miles - ${calculateMilesRemaining(targetMiles, drivenMiles)} miles to go")
-                    }else{
-                        println("MilitaryTank didn't drive - ${cDriver?.name} is ${cDriver?.age}, but must be 25 or older to drive")
-                    }
-                }else{
-                    println("MilitaryTank didn’t drive - there’s no driver!")
-                }
-            }
-            else -> {
-                println("INVALID VEHICLE")
-            }
-        }
+    /** ADD DRIVER TO VEHICLE */
+    fun addToDriversSeat(driver: Driver){
+        cDriver = driver
     }
 
+    /** Calculate remaining MILES to DRIVE */
     private fun calculateMilesRemaining(tMiles: Double, rMiles: Double): Double{
         return (tMiles - rMiles)
     }
 
-    /** ADD DRIVER TO VEHICLE */
-    fun addDriver(driver: Driver){
-        cDriver = driver
-    }
-
-    /** CHECK IF THERE IS A DRIVER ASSIGNED TO CURRENT VEHICLE */
-    fun isDriverAssigned(): Boolean {
+    /** CHECK IF there is a DRIVER assigned to the selected VEHICLE */
+    private fun isDriverAssigned(): Boolean {
         return when(cDriver != null) {
             true -> { true }
             false -> { false }
         }
     }
+
+    private fun printVehicleAction(printType: Int?){
+        when(printType){
+            1 -> {
+                println("${cDriver?.name} drove $milesDriven miles - $milesRemaining miles to go")
+            }
+            2 -> {
+                println("$cVehicleName - ${cDriver?.name} is ${cDriver?.age}, but must be $cVehicleAgeReq or older to drive this vehicle")
+            }
+            3 -> {
+                println("$cVehicleName didn't drive - there’s no driver!")
+            }
+        }
+    }
+
 }
+
 class MilitaryTank: Vehicle(){
 
+    /** AGE REQUIREMENT for the MILITARY TANK */
     private val ageReq = 25
+
+    /** Check if DRIVERS AGE is EQUAL to ageReq or ABOVE */
     fun checkAgeReq(driverAge: Int): Boolean{
         return (driverAge >= ageReq)
+    }
+
+    fun getAgeReq(): Int {
+        return ageReq
     }
 
 }
 
 class Car: Vehicle(){
 
+    /** AGE REQUIREMENT for the MILITARY TANK */
     private val ageReq = 18
+
+    /** Check if DRIVERS AGE is EQUAL to ageReq or ABOVE */
     fun checkAgeReq(driverAge: Int): Boolean{
         return (driverAge >= ageReq)
+    }
+
+    fun getAgeReq(): Int {
+        return ageReq
     }
 }
