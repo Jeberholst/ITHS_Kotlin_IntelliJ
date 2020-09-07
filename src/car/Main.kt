@@ -1,5 +1,7 @@
 package car
 
+var listOfVehicles = mutableListOf<Vehicle?>()
+
 fun main(){
 
      /** CREATE CLASS AS A NEW INSTANCE-OBJECT */
@@ -10,12 +12,12 @@ fun main(){
      val d2 =  Driver(name = "Niko Klaus", age = 21)
 
      /** ADD 2 TYPES OF VEHICLES TO THE VEHICLE LIST  */
-     vehicle.addVehicle(Car())
-     vehicle.addVehicle(MilitaryTank())
+     vehicle.addVehicle(vehicleTypes = VehicleType.CAR)
+     vehicle.addVehicle(vehicleTypes = VehicleType.MILITARY_TANK)
 
      /** PUT THE 2 VEHICLES IN 2 FINAL VARIABLES -> FROM LIST-INDEX  */
-     val v1 : Vehicle = vehicle.listOfVehicles[0]!!
-     val v2 : Vehicle = vehicle.listOfVehicles[1]!!
+     val v1 : Vehicle = listOfVehicles[0]!!
+     val v2 : Vehicle = listOfVehicles[1]!!
 
      /** DRIVE VEHICLE 1  */
      v1.driveVehicle()

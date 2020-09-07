@@ -1,8 +1,9 @@
 package car
 
+import kotlin.text.StringBuilder
+
 abstract class Vehicle (private var cDriver: Driver? = null){
 
-    var listOfVehicles = mutableListOf<Vehicle?>()
     private var cVehicleName: String? = this::class.java.simpleName
     private var cVehicleAgeReq: Int? = 0
     private var milesRemaining: Double? = 0.0
@@ -10,7 +11,7 @@ abstract class Vehicle (private var cDriver: Driver? = null){
 
     fun driveVehicle(targetMiles: Double = 0.0, driveMiles: Double = 0.0){
 
-        var printType: Int? = 3
+        var printType = VehicleActions.NO_DRIVER
 
         milesRemaining = calculateMilesRemaining(tMiles = targetMiles, rMiles = driveMiles)
         milesDriven = driveMiles
@@ -19,27 +20,27 @@ abstract class Vehicle (private var cDriver: Driver? = null){
             true ->
                when(this) {
                    is Car -> {
-                       cVehicleAgeReq = this.getAgeReq()
+                       cVehicleAgeReq = ageReq
                        printType = when(this.checkAgeReq(driverAge = cDriver!!.age)){
-                          true ->  {1}
-                          false -> {2}
+                          true ->  {VehicleActions.DRIVE}
+                          false -> {VehicleActions.AGE_REQUIREMENT_FAIL}
                        }
                    }
                    is MilitaryTank -> {
-                       cVehicleAgeReq = this.getAgeReq()
+                       cVehicleAgeReq = ageReq
                        printType = when(this.checkAgeReq(driverAge = cDriver!!.age)){
-                           true ->  {1}
-                           false -> {2}
+                           true ->  {VehicleActions.DRIVE}
+                           false -> {VehicleActions.AGE_REQUIREMENT_FAIL}
                        }
                }
            }
         }
-        printVehicleAction(printType)
+        println(getVehiclePrintStr(printType))
     }
 
     /** ADD A VEHICLE TO THE LIST OF VEHICLES  */
-    open fun addVehicle(vehicle: Vehicle?){
-        listOfVehicles.add(vehicle)
+    open fun addVehicle(vehicleTypes: VehicleType){
+        listOfVehicles.add(vehicleTypes.getVehicleType())
     }
 
     /** ADD DRIVER TO VEHICLE */
@@ -60,34 +61,36 @@ abstract class Vehicle (private var cDriver: Driver? = null){
         }
     }
 
-    private fun printVehicleAction(printType: Int?){
-        when(printType){
-            1 -> {
-                println("${cDriver?.name} drove $milesDriven miles - $milesRemaining miles to go")
-            }
-            2 -> {
-                println("$cVehicleName - ${cDriver?.name} is ${cDriver?.age}, but must be $cVehicleAgeReq or older to drive this vehicle")
-            }
-            3 -> {
-                println("$cVehicleName didn't drive - there’s no driver!")
+    /** BUILD (VEHICLE ACTION OR NON-ACTION)-STRING  */
+    private fun getVehiclePrintStr(printType: VehicleActions): String{
+        val strBuilder = StringBuilder().apply {
+            when(printType){
+                VehicleActions.DRIVE -> {
+                    append("${cDriver?.name} drove $milesDriven miles - $milesRemaining miles to go")
+                }
+                VehicleActions.AGE_REQUIREMENT_FAIL -> {
+                    append("$cVehicleName - ${cDriver?.name} is ${cDriver?.age}, " +
+                            "but must be $cVehicleAgeReq or older to drive this vehicle")
+                }
+                VehicleActions.NO_DRIVER -> {
+                    append("$cVehicleName didn't drive - there’s no driver!")
+                }
             }
         }
+        return strBuilder.toString()
     }
 
 }
 
+
 class MilitaryTank: Vehicle(){
 
     /** AGE REQUIREMENT for the MILITARY TANK */
-    private val ageReq = 25
+    val ageReq = 25
 
     /** Check if DRIVERS AGE is EQUAL to ageReq or ABOVE */
     fun checkAgeReq(driverAge: Int): Boolean{
         return (driverAge >= ageReq)
-    }
-
-    fun getAgeReq(): Int {
-        return ageReq
     }
 
 }
@@ -95,14 +98,25 @@ class MilitaryTank: Vehicle(){
 class Car: Vehicle(){
 
     /** AGE REQUIREMENT for the MILITARY TANK */
-    private val ageReq = 18
+    val ageReq = 18
 
     /** Check if DRIVERS AGE is EQUAL to ageReq or ABOVE */
     fun checkAgeReq(driverAge: Int): Boolean{
         return (driverAge >= ageReq)
     }
+}
 
-    fun getAgeReq(): Int {
-        return ageReq
+/** ENUM CLASS FOR SPECIFIC PRINT-TYPES  */
+enum class VehicleActions{
+    DRIVE, AGE_REQUIREMENT_FAIL, NO_DRIVER
+}
+
+/** ENUM CLASS FOR AVAILABLE VEHICLE-TYPES */
+enum class VehicleType{
+    CAR, MILITARY_TANK;
+
+    fun getVehicleType(): Vehicle? = when(this){
+        CAR -> Car()
+        MILITARY_TANK -> MilitaryTank()
     }
 }
